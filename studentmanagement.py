@@ -337,7 +337,7 @@ class StudentManager:
 def main():
     sm = StudentManager()
     while True:
-        print("\n======= 学生信息成绩管理系统【双表版】=======")
+        print("\n======= 学生信息成绩登陆界面 =======")
         print("1. 添加账号")
         print("2. 登陆账号")
         print("0. 退出系统")
