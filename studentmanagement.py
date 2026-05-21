@@ -310,7 +310,7 @@ class StudentManager:
 
     def add_manager(self,account,password):
         try:
-            sql="insert into users(account,password) values(%s,%s)"
+            sql="insert into users1(account,password) values(%s,%s)"
             self.cursor.execute(sql,(account,password))
             self.conn.commit()
             print("账号添加成功")
@@ -319,8 +319,47 @@ class StudentManager:
             self.conn.rollback()
             print("账号添加失败")
 
+    def sign_in(self,account,password):
+        try:
+            sql="select password from users1 where account=%s"
+            self.cursor.execute(sql,(account,))
+            res = self.cursor.fetchone()
+            if password == res['password']:
+                print("登陆成功")
+                function()
+            else:
+                print("密码错误")
+        except Exception as e:
+            self.conn.rollback()
+            print("登陆失败")
+
 # 主菜单函数
 def main():
+    sm = StudentManager()
+    while True:
+        print("\n======= 学生信息成绩管理系统【双表版】=======")
+        print("1. 添加账号")
+        print("2. 登陆账号")
+        print("0. 退出系统")
+        choice = input("请输入功能编号：")
+        if choice == "1":
+            account = input("新建账号：")
+            password = input("设置密码：")
+            sm.add_manager(account,password)
+
+        elif choice == "2":
+            account = input("输入账号：")
+            password = input("输入密码：")
+            sm.sign_in(account,password)
+
+        elif choice == "0":
+            sm.close()
+            print("👋 系统退出成功，再见！")
+            break
+
+        else:
+            print("❌ 输入无效，请输入0-6的数字！")
+def function():
     sm = StudentManager()
     while True:
         print("\n======= 学生信息成绩管理系统【双表版】=======")
@@ -330,7 +369,6 @@ def main():
         print("4. 修改学生基础信息")
         print("5. 修改学生成绩信息")
         print("6. 删除学生（含成绩）")
-        print("7. 添加账号")
         print("0. 退出系统")
         print("==========================================")
 
@@ -370,14 +408,8 @@ def main():
             sid = input("请输入要删除的学号：")
             sm.delete_student(sid)
 
-        elif choice == "7":
-            account = input("新建账号：")
-            password = input("设置密码：")
-            sm.add_manager(account,password)
-
         elif choice == "0":
-            sm.close()
-            print("👋 系统退出成功，再见！")
+            print("👋 系统退出成功！")
             break
 
         else:
