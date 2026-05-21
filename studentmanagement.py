@@ -308,7 +308,7 @@ class StudentManager:
         self.conn.close()
         print("✅ 数据库连接已关闭")
 
-    def add_manager(self):
+    def add_manager(self,account,password):
         try:
             sql="insert into users(account,password) values(%s,%s)"
             self.cursor.execute(sql,(account,password))
