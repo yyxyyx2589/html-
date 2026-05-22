@@ -1,84 +1,56 @@
-import pymysql
-class DBHelper:
-    def __init__(self,host,user,pwd,db):
-        self.conn = pymysql.connect(
-            host=host,
-            user=user,
-            password=pwd,
-            database=db,
-            charset='utf8mb4')
-        self.cursor = self.conn.cursor()
+def print_books_pretty(result):
+    if not result:
+        print("暂无图书信息")
+        return
 
-    def query(self,sql,param=None):
-        self.cursor.execute(sql,param or ())
-        return self.cursor.fetchall()
+    # 1. 定义表头映射（数据库字段 -> 中文表头）
+    headers = {
+        'book_id': '图书编号',
+        'book_name': '书名',
+        'author': '作者',
+        'category': '分类',
+        'status': '状态'
+    }
 
-    def execute(self,sql,param=None):
-        try:
-            self.cursor.execute(sql,param or ())
-            return self.conn.commit()
-        except pymysql.MySQLError as e:
-            self.conn.rollback()
-            raise e
+    # 2. 计算每一列的最佳宽度
+    # 初始化宽度为表头的长度
+    widths = {key: len(val) for key, val in headers.items()}
 
-    def close(self):
-        if self.conn:
-            self.conn.close()
-        if self.cursor:
-            self.cursor.close()
+    # 遍历数据，如果某行数据比当前记录的宽度长，则更新宽度
+    for row in result:
+        for key in headers.keys():
+            # 将数据转为字符串并计算长度
+            val_len = len(str(row.get(key, "")))
+            if val_len > widths[key]:
+                widths[key] = val_len
 
-class UserManager:
-    def __init__(self,db_helper):
-        self.db=db_helper
+    # 3. 增加一点间距（Padding），比如每列多加2个空格
+    for key in widths:
+        widths[key] += 2
 
-    def add_user(self,username,gender,phone):
-        sql="insert into users4(username,gender,phone) values(%s,%s,%s)"
-        self.db.execute(sql,(username,gender,phone))
-        result=self.db.query("select * from users4")
-        for row in result:
-            print(row)
+    # 4. 打印表头
+    header_line = ""
+    for key, title in headers.items():
+        # 使用动态计算出的宽度进行格式化
+        header_line += f"{title:<{widths[key]}}"
+    print(header_line)
 
-    def get_user_by_id(self,id):
-        sql="select * from users4 where id=%s"
-        result=self.db.query(sql,(id,))
-        if result:
-            for row in result:
-                print(row)
+    # 5. 打印分隔线 (可选，增加美观度)
+    print("-" * sum(widths.values()))
 
-    def update_user_phone(self,id,new_phone):
-        sql="update users4 set phone=%s where id=%s"
-        self.db.execute(sql,(new_phone,id))
-        result=self.db.query("select * from users4 where id=%s",(id,))
-        if result:
-            for row in result:
-                print(row)
+    # 6. 打印数据行
+    for row in result:
+        row_line = ""
+        for key in headers.keys():
+            val = row.get(key, "")
+            row_line += f"{val:<{widths[key]}}"
+        print(row_line)
 
+# --- 模拟数据测试 ---
+data = [
+    {'book_id': 1, 'book_name': '海', 'author': '老人', 'category': 'C', 'status': '已借出'},
+    {'book_id': 3, 'book_name': '红楼梦', 'author': '孙悟空', 'category': 'A', 'status': '可借阅'},
+    {'book_id': 101, 'book_name': 'Python高级编程指南', 'author': 'Guido van Rossum', 'category': 'B', 'status': '维修中'}
+]
 
-    def delete_user(self,id):
-        sql="delete from users4 where id=%s"
-        self.db.execute(sql,(id,))
-        result=self.db.query("select * from users4")
-        if result:
-            for row in result:
-                print(row)
-
-
-if __name__ == '__main__':
-    db=DBHelper('localhost','root','1234','company2')
-    user_manager=UserManager(db)
-            #  之前创建的表的结构
-    #create table if not exists users4(
-     #   id int primary key auto_increment,
-      #  username varchar(20) not null,
-       # gender enum('男','女') default('男'),
-        #phone varchar(20) not null)
-
-    try:
-        #user_manager.add_user('小明','男','1560')
-        user_manager.get_user_by_id(3)
-        #user_manager.update_user_phone(2,666)
-        #user_manager.delete_user(1)
-    except pymysql.MySQLError as e:
-        print(e)
-    finally:
-        db.close()
+print_books_pretty(data)
