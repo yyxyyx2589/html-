@@ -232,7 +232,6 @@ class Book_Manager:
             print("❌ 暂无图书信息")
             return
         print("============== 所有图书信息 ==============")
-        self.write_log("查询所有图书信息")
         for row in result:
             print(f"图书编号:{row['book_id']}     书名:《{row['book_name']}》     作者:{row['author']}     图书分类:{row['category']}     图书状态:{row['status']}")
 
