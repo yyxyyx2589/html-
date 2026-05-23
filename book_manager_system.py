@@ -57,7 +57,7 @@ class Book_Manager:
                 break
 
             else:
-                print("❌ 输入无效，请输入0-3的数字！")
+                print("❌ 输入无效，请输入0-5的数字！")
 
     def show_all_manager(self, account):
         sql = "select * from admin"
