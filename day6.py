@@ -49,58 +49,59 @@ except requests.exceptions.RequestException as e:
         print("请输入城市：")
     if not se.research()
     '''
+def get_weather():
+    import requests
+    base_all=0
+    url='https://restapi.amap.com/v3/weather/weatherInfo'
+    params_base={
+        'city':'新余',
+        'key':'7197563b3bb5d59cd1e2cf3c88965600',
+        'extensions':'base',
+        'output':'json'
+    }
 
-'''import requests
-base_all=0
-url='https://restapi.amap.com/v3/weather/weatherInfo'
-params_base={
-    'city':'新余',
-    'key':'7197563b3bb5d59cd1e2cf3c88965600',
-    'extensions':'base',
-    'output':'json'
-}
+    print('请选择查询地点:')
+    pisition=input()
+    params_base['city']=pisition
 
-print('请选择查询地点:')
-pisition=input()
-params_base['city']=pisition
+    print('请选择查询模式:1:今日天气 2:预测近三日天气')
+    x=int(input())
+    if x==1:
+        resp = requests.get(url, params=params_base)
+        resp_json=resp.json()
+        data=resp_json['lives']
+        print('province:',data[0]['province'])
+        print('city:', data[0]['city'])
+        print('adcode:', data[0]['adcode'])
+        print('weather:', data[0]['weather'])
+        print('temperature:', data[0]['temperature'])
+        print('winddirection:', data[0]['winddirection'])
+        print('windpower:', data[0]['windpower'])
+        print('humidity:', data[0]['humidity'])
+        print('reporttime:', data[0]['reporttime'])
+        print('temperature_float:', data[0]['temperature_float'])
+        print('humidity_float:', data[0]['humidity_float'])
 
-print('请选择查询模式:1:今日天气 2:预测近三日天气')
-x=int(input())
-if x==1:
-    resp = requests.get(url, params=params_base)
-    resp_json=resp.json()
-    data=resp_json['lives']
-    print('province:',data[0]['province'])
-    print('city:', data[0]['city'])
-    print('adcode:', data[0]['adcode'])
-    print('weather:', data[0]['weather'])
-    print('temperature:', data[0]['temperature'])
-    print('winddirection:', data[0]['winddirection'])
-    print('windpower:', data[0]['windpower'])
-    print('humidity:', data[0]['humidity'])
-    print('reporttime:', data[0]['reporttime'])
-    print('temperature_float:', data[0]['temperature_float'])
-    print('humidity_float:', data[0]['humidity_float'])
+    if x==2:
+        params_base['extensions']='all'
+        resp = requests.get(url, params=params_base)
+        resp_json = resp.json()
+        data = resp_json['forecasts']
+        print('province:', data[0]['province'])
+        print('city:', data[0]['city'])
+        print('adcode:', data[0]['adcode'])
+        print('reporttime:', data[0]['reporttime'])
+        fore=data[0]['casts']
+        print(fore)
+        for i in fore[0]:
+            print(i)
+            print(f'date:', fore[0]['date'], end=' ')
+            print('dayweather:', fore[0]['dayweather'], end=' ')
+            print('nightweather:', fore[0]['nightweather'], end=' ')
+            print('daytemp:', fore[0]['daytemp'], end=' ')
+            print('nighttemp:', fore[0]['nighttemp'], end=' ')
 
-if x==2:
-    params_base['extensions']='all'
-    resp = requests.get(url, params=params_base)
-    resp_json = resp.json()
-    data = resp_json['forecasts']
-    print('province:', data[0]['province'])
-    print('city:', data[0]['city'])
-    print('adcode:', data[0]['adcode'])
-    print('reporttime:', data[0]['reporttime'])
-    fore=data[0]['casts']
-    print(fore)
-    for i in fore[0]:
-        print(i)
-        print(f'date:', fore[0]['date'], end=' ')
-        print('dayweather:', fore[0]['dayweather'], end=' ')
-        print('nightweather:', fore[0]['nightweather'], end=' ')
-        print('daytemp:', fore[0]['daytemp'], end=' ')
-        print('nighttemp:', fore[0]['nighttemp'], end=' ')
-'''
+get_weather()
 
 '''class Student:
     school='新余学院'
@@ -223,7 +224,7 @@ li=[q1,q2]
 print('总面积:',calculate_total_area(li))
 '''
 
-
+"""
 class BankAccount:
     def __init__(self,account_id,name,initial_balance=0000,password=0000):
         self.account_id=account_id
@@ -272,3 +273,4 @@ q1.deposit(100)
 q1.withdraw(100,0000)
 q1.transfer(0000)
 
+"""

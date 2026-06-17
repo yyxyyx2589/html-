@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>day28</title>
+        <link rel="stylesheet" href="day28.css">
+    </head>
+
+<body>
+    <!-- 最外层容器，对应 CSS 中的 .resume-layout -->
+    <div class="resume-layout">
+
+        <!-- 左侧区域 (侧边栏)，对应 CSS 中的 .sidebar -->
+        <aside class="sidebar">
+            <!-- 这里放个人信息、头像等 -->
+            <div class="resume-header" style="margin:0; width:100%;">
+                <h2 class="name-title">前端开发工程师</h2>
+                <p>姓名：张三</p>
+                <p>熟练掌握CSS</p>
+            </div>
+        </aside>
+
+        <!-- 右侧区域 (主内容)，对应 CSS 中的 .main-content -->
+        <main class="main-content">
+            <!-- 原来的卡片放在这里 -->
+            <div class="card-warp">
+                <div class="project-card">
+                    <h3>企业官网项目</h3>
+                    <p>使用FLEX布局</p>
+                </div>
+                <div class="project-card">
+                    <h3>后台管理系统</h3>
+                    <p>进度条动画、卡片悬浮交互落地</p>
+                </div>
+            </div>
+
+            <!-- 原来的技能条放在这里 -->
+            <div class="skill-box">
+                <h3>CSS掌握程度</h3>
+                <div class="skill-bar">
+                    <div class="skill-bar-fill animated"></div>
+                </div>
+            </div>
+        </main>
+
+    </div>
+</body>
+</html>
+
+

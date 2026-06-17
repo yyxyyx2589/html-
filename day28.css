@@ -1,0 +1,116 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* 简历头部渐变背景 */
+.resume-header{
+    width: 90%;
+    margin: 30px auto; /*上下外边距 左右自动居中 */
+    padding: 40px;  /*内部间距 */
+    /*（角度 起始色0% 结束色100%）*/
+    background: linear-gradient( 130deg,rgb(255, 255, 255), #ae805d);
+    color: #5c3c3c;/*文字颜色*/
+    border-radius: 16px;
+}
+
+/* 文字渐变效果 */
+.name-title{
+    /*文字容器横向渐变背景*/
+    background: linear-gradient( 90deg, #477bb0, #bd55b1);
+    /*将背景裁剪到文字区域，只有文字位置才显示背景*/
+    -webkit-background-clip: text;
+    /*将文字颜色设置为透明，文字位置才显示文字颜色*/
+    -webkit-text-fill-color: transparent;
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 10px;/*和下方段落拉开间距*/
+}
+
+/*卡片阴影  悬浮上浮过渡动画 */
+.card-warp{
+    width: 90%; /*占父容器90%*/
+    margin: 0 auto 30px; 
+    display: flex;
+    gap: 20px;
+}
+
+.project-card{
+    flex: 1;/*均分父容器*/
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(8, 8, 8, 0.89);
+    /*0.3s为过渡时间，ease为过渡效果*/
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background: #fff;
+}
+
+/* 鼠标悬浮卡片触发样式变化 */
+.project-card:hover{
+    /*鼠标悬浮时阴影变大*/
+    box-shadow: 0 12px 32px rgba(14, 13, 13, 0.2);
+    /*鼠标悬浮时卡片上浮*/
+    transform: translateY(-5px);
+}
+
+/*技能进度条过渡动画*/
+.skill-box{
+    width: 90%;
+    margin: 0 auto;
+}
+
+/*进度条底层灰色背景轨道*/
+.skill-bar{
+    width: 100%;
+    height: 8px;
+    background: #775b5b;
+    border-radius: 5px;
+    margin:10px 0 25px;
+}
+
+/*进度条填充色快*/
+.skill-bar-fill{ 
+    height:8px;
+    background:linear-gradient(90deg, #575eae, #ac449c);
+    border-radius: 5px;
+    width:0;
+    transition: width 1s ease-in-out;
+}
+
+/*宽度 自动播放拉长动画*/
+.skill-bar-fill.animated{
+    width: 85%;
+}
+
+
+/* 默认：手机端单列 */
+.resume-layout {
+  display: flex;
+  flex-direction: column;  /* 手机垂直排列 */
+  gap: 24px;
+}
+ 
+/* 768px以上：平板/桌面双列 */
+@media (min-width: 768px) {
+  .resume-layout {
+    flex-direction: row;      /* 桌面横向排列 */
+  }
+  .sidebar {
+    flex: 0 0 240px;
+  }
+  .main-content {
+    flex: 1;
+  }
+}
+ 
+/* 手机端导航：纵向排列 */
+@media (max-width: 767px) {
+  nav ul {
+    flex-direction: column;
+    gap: 8px;
+  }
+  .profile-header {
+    flex-direction: column;
+    text-align: center;
+  }

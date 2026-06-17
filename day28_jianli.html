@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人简历</title>
+    <link rel="stylesheet" href="day28_jianli.css">
+</head>
+<body>
+
+    <header>
+        <nav>
+            <ul>
+                <!-- 这里的 href 对应下方 section 的 id -->
+                <li><a href="#about">关于我</a></li>
+                <li><a href="#skills">技能</a></li>
+                <li><a href="#projects">项目</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main  class="main-content">
+        <!-- 第一块：个人介绍 -->
+        <section id="about">
+            <h2>关于我</h2>
+            <div class="info">
+                
+                <div class="avatar-wrapper">
+                    <img src="一寸.jpg" alt="头像" class="avatar">
+                    <span class="status-dot"></span>
+                </div>
+
+                <div class="name">
+                    <p>姓名：yyx</p>
+                    <p>年龄：22</p>
+                    <p>职位：前端开发工程师</p>
+                </div>
+                
+            </div>
+            
+        </section>
+
+<!-- 专业技能 -->
+<section id="skills">
+    <h2>技能</h2>
+
+    <ul class="skill-list">
+        <!-- 技能 1 -->
+        <li>
+            <div class="skill-name">熟练使用HTML、CSS</div>
+            <div class="progress-track">
+                <!-- style="width: 90%" 控制初始长度 -->
+                <div class="progress-fill" style="width: 90%;"></div>
+            </div>
+        </li>
+
+        <!-- 技能 2 -->
+        <li>
+            <div class="skill-name">掌握Python</div>
+            <div class="progress-track">
+                <div class="progress-fill" style="width: 75%;"></div>
+            </div>
+        </li>
+
+        <!-- 技能 3 -->
+        <li>
+            <div class="skill-name">掌握Excel基本操作</div>
+            <div class="progress-track">
+                <div class="progress-fill" style="width: 60%;"></div>
+            </div>
+        </li>
+
+        <!-- 技能 4 -->
+        <li>
+            <div class="skill-name">熟悉JavaScript</div>
+            <div class="progress-track">
+                <div class="progress-fill" style="width: 80%;"></div>
+            </div>
+        </li>
+
+        <!-- 技能 5 -->
+        <li>
+            <div class="skill-name">会使用Git、GitHub</div>
+            <div class="progress-track">
+                <div class="progress-fill" style="width: 70%;"></div>
+            </div>
+        </li>
+    </ul>
+</section>
+
+        <section id="projects">
+            <div class="project">
+
+                <div class="project-card">
+                <h2>项目1</h2>
+                    <article>
+                        <p><a href="https://github.com/yyxyyx2589/shi_xun/blob/main/studentmanagement.py" target="_blank">学生管理系统</a></p>
+                    </article>
+                </div>
+            
+
+                <div class="project-card">
+                    <h2>项目2</h2>
+                        <article>
+                            <p><a href="https://github.com/yyxyyx2589/shi_xun/blob/main/book_manager_system.py" target="_blank">图书管理系统</a></p>
+                        </article>
+                </div>
+
+            </div>
+            
+
+        </section>
+
+        <aside>
+            <p>联系方式：2589485641@qq.com</p>
+        </aside>
+    </main>
+
+    <footer>
+        <p>2026 个人简历</p>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,277 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    --font-size: 16px;
+    --radius: 8px;
+}
+
+body {
+    font-family: "Microsoft YaHei", sans-serif;
+    background-color: #f5f5f5;
+    color: #333;
+    line-height: 1.6;
+}
+
+/*  Header & Nav (顶部导航)  */
+header {
+    background-color: #fff;
+    padding: 15px 20px;
+    border-bottom: 1px solid #ddd;
+    position: fixed;      /* 固定定位 */
+    top: 0;               /* 紧贴浏览器顶部 */
+    left: 0;
+    width: 100%;          /* 占满屏幕宽度 */
+    z-index: 100;         /* 确保导航栏始终在最上层 */
+}
+
+/*顶部导航*/
+nav ul {
+    list-style: none; /* 去掉列表圆点 */
+    display: flex;    /* 让菜单横向排列 */
+    gap: 30px;        /* 菜单项之间的间距 */
+    justify-content: center;
+}
+
+nav a {
+    text-decoration: none; /* 去掉下划线 */
+    color: #333;
+    font-size: 16px;
+    padding-bottom: 5px;
+    transition: color 0.3s;
+}
+
+nav a:hover {
+    color: #007bff;
+    text-decoration: underline; /* 悬停时显示下划线，模仿图片风格 */
+    
+}
+
+
+main {
+    max-width: 800px; /* 限制最大宽度，类似图片布局 */
+    margin: 20px auto; /* 居中显示 */
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0,0,0,0.05);
+}
+
+section {
+    padding: 20px;
+    border-bottom: 10px solid #fff; /* 用白色边框分隔不同颜色的板块 */
+}
+
+/* 标题通用样式 */
+h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+}
+
+/* 标题左侧的蓝色竖线装饰 */
+h2::before {
+    content: "";
+    display: inline-block;
+    width: 4px;
+    height: 24px;
+    background-color: #007bff;
+    margin-right: 10px;
+}
+
+.subtitle {
+    color: #d9534f; /* 红色副标题文字 */
+    font-size: 14px;
+    margin-bottom: 15px;
+    display: block;
+}
+
+
+/* 第一块：关于我 */
+#about {
+    background-color: #eaf6ff;
+}
+
+/* 第二块：学技能 */
+#skills {
+    background-color: #fffdf0;
+}
+
+/*  技能列表样式 */
+.skill-list {
+    list-style: none;
+    margin-top: 10px;
+}
+
+.skill-list li {
+    margin-bottom: 15px; /* 增加间距，让进度条更清晰 */
+}
+
+.skill-name {
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 6px; /* 文字和进度条之间的距离 */
+    font-size: 15px;
+}
+
+.progress-track {
+    width: 50%;
+    height: 8px;           /* 进度条的高度 */
+    background-color: #e0e0e0; /* 浅灰色背景 */
+    border-radius: 4px;    /* 圆角 */
+    overflow: hidden;      /* 确保内部蓝色条不溢出圆角 */
+}
+
+.progress-fill {
+    height: 90%;
+    background-color: #007bff; /* 你的主题蓝色 */
+    border-radius: 4px;
+
+    /* 当宽度变化时，用 0.5秒 平滑过渡 */
+    transition: width 0.5s ease-in-out;
+}
+
+.skill-list li:hover {
+    /*鼠标悬浮时阴影变大*/
+    box-shadow: 0 12px 32px rgba(14, 13, 13, 0.2);
+    /*鼠标悬浮时卡片上浮*/
+    transform: translateY(-5px);
+}
+
+.skill-list li:hover .progress-fill {
+    width: 90% !important; /* 强制覆盖行内样式，填满轨道 */
+    background-color: #0056b3; 
+}
+
+/* 奇数行背景色 */
+.skill-list li:nth-child(odd) {
+    background-color: #dbeaff;
+}
+
+/* 偶数行背景色 */
+.skill-list li:nth-child(even) {
+    background-color: #ffffff;
+}
+
+/*  Aside & Footer  */
+aside {
+    background-color: #eee;
+    padding: 15px;
+    text-align: center;
+    font-size: 14px;
+    color: #666;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #333;
+    color: #fff;
+    font-size: 12px;
+}
+
+.main-content {
+    margin-top: 60px; 
+}
+
+.info{
+    display: flex;          
+    align-items: center;     /* 垂直居中对齐 */
+    gap: 30px;               /* 头像和文字之间的间距 */
+    margin-top: 20px;
+}
+
+/*  头像及在线状态  */
+.avatar-wrapper {
+    position: relative;   /* 为绿点提供定位基准 */
+    display: inline-block;/* 让容器大小适应图片 */
+    margin-top: 10px;     /* 适当增加一点与上方文字的间距 */
+}
+
+.avatar {
+    display: block;       /* 消除 img 标签底部的默认空白间隙 */
+    width: 100px;         /* 给头像设置固定宽高，防止布局塌陷 */
+    height: 100px;
+    border-radius: 50%;  
+    object-fit: cover;    /* 保证图片不变形 */
+}
+
+.status-dot {
+    position: absolute;   
+    right: 4px;           /* 距离右下角的位置，可根据头像大小微调 */
+    bottom: 4px;
+    width: 12px;
+    height: 12px;
+    background-color: #4ade80; 
+    border-radius: 50%; 
+    border: 2px solid #fff;    /* 白色描边，让绿点在头像上更清晰 */
+}
+
+.name{
+    margin: 20px;          
+    font-size: var(--font-size);
+    color: #333;
+}
+
+.project{
+    display: flex;
+    gap: 80px;
+    margin-top: 15px;
+
+}
+
+.project-card{
+    flex: 1;/*均分父容器*/
+    background-color: #eae6e6;
+    border-radius: var(--radius);
+}
+
+article a {
+    text-decoration: none; /* 去掉下划线 */
+    color: #333;
+    font-size: 16px;
+}
+
+article a:hover {
+    color: #007bff;
+    text-decoration: underline; /* 悬停时显示下划线，模仿图片风格 */
+}
+
+/* 媒体查询：适配平板及更小屏幕 (屏幕宽度小于 768px) */
+@media (max-width: 768px) {
+    /* 调整导航栏，使其垂直堆叠 */
+    nav ul {
+        gap: 15px;
+        align-items: center;
+    }
+
+    /* 调整“关于我”部分，使头像和文字垂直排列 */
+    .info {
+        flex-direction: column;
+        text-align: center;
+        gap: 20px;
+    }
+
+    /* 调整项目部分，使项目卡片垂直堆叠 */
+    .project {
+        flex-direction: column;
+        gap: 30px;
+    }
+}
+
+/* 媒体查询：适配手机屏幕 (屏幕宽度小于 480px) */
+@media (max-width: 480px) {
+    /* 进一步减小内边距，让内容更紧凑 */
+    section {
+        padding: 15px;
+    }
+
+    /* 调整标题大小 */
+    h2 {
+        font-size: 20px;
+    }
+
+    /* 调整技能列表项的内边距 */
+    .skill-list li {
+        padding: 8px 10px;
+    }
+}
